@@ -1,0 +1,11 @@
+{
+  "files": {
+    "index.js": "c7155bb09b2f0bec4e708906c11ccc5d49498495a5fd479bdc513def27ac42f6",
+    "module.json": "7506bfd919ad6d124b812e534570415a99325110f3b33589deaa5ee3f8979e1f"
+  },
+  "defs": {
+  	"S_PLAYER_STAT_UPDATE": 9,
+  	"S_CREATURE_CHANGE_HP": 6,
+  	"C_PLAYER_LOCATION": 5
+  }
+}
