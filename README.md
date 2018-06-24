@@ -2,6 +2,9 @@
 
 a rewritten version of Ruby's drop coz fuck obsfucated code.
 
+# Usage
+/8 drop (desired HP)
+
 # requirements
 command
 
