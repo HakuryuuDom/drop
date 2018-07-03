@@ -48,7 +48,7 @@ module.exports = function Drop(dispatch) {
 			loc: new Vec3(location.loc.x, location.loc.y, location.loc.z + 400 + percentToDrop * (game.me.race === 'castanic' ? 20 : 10)),
 			type: 2,
 			time: location.time - locRealTime + Date.now() - 50
-		}))
+		}));
 		dispatch.toServer('C_PLAYER_LOCATION', 5, Object.assign(location, {
 			type: 7,
 			time: location.time - locRealTime + Date.now() + 50
