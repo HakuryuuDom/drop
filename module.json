@@ -1,7 +1,10 @@
 {
 	"disableAutoUpdate": false,
 	"options": {
-		"niceName": "drop"
+		"niceName": "drop",
+		"settingsVersion": 1,
+		"settingsFile": "config.json",
+		"settingsMigrator": "setting_migration.js"
 	},
     "servers": ["https://raw.githubusercontent.com/HakuryuuDom/drop/master/"],
     "supportUrl": "https://discord.gg/maqBmJV"
