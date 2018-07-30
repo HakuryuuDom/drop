@@ -1,8 +1,7 @@
 {
   "files": {
-    "index.js": "79d09a69bf92ff73b56478df7568909c334bdc0ee4351357486c5b74ad62056b",
-    "module.json": "2a710c69d01bdb7d0c0b81c9e89c94c8fd290dd63f0bbd766bff03bd86797c20",
-    "setting_migration.js": "90f4ffb843c62dbc9c2a77ab2d0c03dcc898d75295c57cb01cf64a1110c3c760"
+    "index.js": "b9b985cf87ccee982c1750af7a5bbf85fca163e5fe553be90dc56394d630821e",
+    "module.json": "d82668cc71e69f800360a384e40106d6544538bf7a7f268b71886ca4968cfcd8"
   },
   "defs": {
   	"S_PLAYER_STAT_UPDATE": 9,
