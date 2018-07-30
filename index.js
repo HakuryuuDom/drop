@@ -3,7 +3,8 @@ module.exports = function Drop(mod) {
 	let location = null,
 		locRealTime = 0,
 		curHp = 0,
-		maxHp = 0;
+		maxHp = 0,
+		cooldown = false
 
 	mod.hook('S_PLAYER_STAT_UPDATE', 9, event => {
 		curHp = event.hp;
@@ -14,7 +15,7 @@ module.exports = function Drop(mod) {
 		if(mod.game.me.is(event.target)) {
 			curHp = event.curHp;
 			maxHp = event.maxHp;
-		};
+		}
 	});
 
 	mod.hook('C_PLAYER_LOCATION', 5, event => {
@@ -30,10 +31,22 @@ module.exports = function Drop(mod) {
 			}
 			percent = mod.settings.defaultPercent //load from config
 		}
+		if(cooldown) {
+			mod.command.message('Error: Please wait '+ mod.settings.dropCooldown.toString() + ' seconds to use the command again, this is to protect you from disconnecting.');
+			mod.command.message('You can change this value in config.json.');
+			return;
+		}
 		percent = Number(percent);
 
 		if(!(percent > 0 && percent <= 100) || !curHp) {
-			mod.command.message('Error: ' + percent + '% is not between 1% and 100%, or Current HP is unknown.')
+			mod.command.message('Error: ' + percent.toString() + '% is not between 1% and 100%, or Current HP is unknown.')
+			return;
+		}
+		
+		let percentToDrop = (curHp * 100 / maxHp) - percent;
+
+		if(percentToDrop <= 0) {
+			mod.command.message('Error: Cannot drop to a value above or equal to your current HP.')
 			return;
 		}
 		mod.settings.defaultPercent = percent //save to config
@@ -41,12 +54,13 @@ module.exports = function Drop(mod) {
 			mod.command.message('New Update! Your percent to drop has been saved. You may now use /8 drop (without a number) to drop your HP to the saved percent.')
 			mod.settings.firstUse = false;
 		}
-		let percentToDrop = (curHp * 100 / maxHp) - percent;
 
-		if(percentToDrop <= 0) {
-			mod.command.message('Error: Your HP cannot be zero or negative!')
-			return;
-		}
+		mod.command.message('Dropping to ' + percent.toString() + '% HP. Please wait ' + mod.settings.dropCooldown.toString() + ' seconds before using the command again.');
+		mod.command.message('You can change this value in config.json.');
+		cooldown = true;
+		setTimeout(() => {
+			cooldown = false
+		}, mod.settings.dropCooldown * 1000);
 		
 
 		mod.send('C_PLAYER_LOCATION', 5, Object.assign({}, location, {

@@ -2,7 +2,7 @@
 	"disableAutoUpdate": false,
 	"options": {
 		"niceName": "drop",
-		"settingsVersion": 1,
+		"settingsVersion": 2,
 		"settingsFile": "config.json",
 		"settingsMigrator": "setting_migration.js"
 	},
