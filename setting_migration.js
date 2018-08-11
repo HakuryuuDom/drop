@@ -1,7 +1,6 @@
 'use strict'
 
 const DefaultSettings = {
-	"firstUse": false,
 	"defaultPercent": null,
 	"dropCooldown": 30
 }
@@ -21,8 +20,11 @@ module.exports = function MigrateSettings(from_ver, to_ver, settings) {
         switch(to_ver)
         {
             case 2:
-             settings.dropCooldown = 30;
-             break;
+                settings.dropCooldown = 30;
+                break;
+            case 3:
+                delete settings.firstUse;
+                break;
         }
         
         return settings;

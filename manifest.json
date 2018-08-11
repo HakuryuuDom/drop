@@ -1,9 +1,8 @@
 {
-  "files": {
-  	"config.json": {"overwrite": false, "hash": "d99cc16f14bfddb2fe3e4a4fbbc8204872c56989e15a96f79554c1cfee56b92e"},	
-    "index.js": "ef32b2a685162d4e1f5d5dbe44632d3cebd4fe81167ce582974871ddb67f1793",
-    "module.json": "09d5f3afca843406df9bef5346dd610f5050cd7f3151dfc861627719003fee3b",
-    "setting_migration.js": "0ae7914c573e25e4f8be65def75acc63b471b01c5e44013da01f0804938367a7"
+  "files": {	
+    "index.js": "c34fa45746ca0a1532ffa262c8035008e2fc32a81339fcfc148efff0f1852bfc",
+    "module.json": "6787f2182110510cdae52a817de22c24881a519279cd457eaeb3853fb23b2c2b",
+    "setting_migration.js": "290674e37288f68e330cb58b56703dd66d82c1e1520d34d77ae6d8fc9ff82ed5"
   },
   "defs": {
   	"S_PLAYER_STAT_UPDATE": 9,
