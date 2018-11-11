@@ -5,6 +5,9 @@ a rewritten version of Ruby's drop coz fuck obsfucated code.
 # Usage
 /8 drop (desired HP)
 
+# AFK Mode
+/8 drop afk - Drops to specified HP percentage (/8 drop afkmin (percent)) after reaching a specified threshold (/8 drop afkmax (percent))
+
 # requirements
 command
 

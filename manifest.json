@@ -1,12 +1,13 @@
 {
-  "files": {	
-    "index.js": "c34fa45746ca0a1532ffa262c8035008e2fc32a81339fcfc148efff0f1852bfc",
-    "module.json": "6787f2182110510cdae52a817de22c24881a519279cd457eaeb3853fb23b2c2b",
-    "setting_migration.js": "290674e37288f68e330cb58b56703dd66d82c1e1520d34d77ae6d8fc9ff82ed5"
-  },
-  "defs": {
-  	"S_PLAYER_STAT_UPDATE": 9,
-  	"S_CREATURE_CHANGE_HP": 6,
-  	"C_PLAYER_LOCATION": 5
-  }
+	"files": {
+		"config.json": "a7eb6de5cebe75a84424b83ebb9a650586b87ba50d15923257b5b29101ce2d07",
+		"index.js": "cd7209520b197e3f11a0579bfefd50a9eac1d72be305c13b8f62ca733abe788b",
+		"module.json": "6787f2182110510cdae52a817de22c24881a519279cd457eaeb3853fb23b2c2b",
+		"setting_migration.js": "94e757403439b29f2d7cd483c3ee22088379c7c8d15cbc69ee13f0adb20bb582"
+	},
+	"defs": {
+		"C_PLAYER_LOCATION": 5,
+		"S_CREATURE_CHANGE_HP": 6,
+		"S_PLAYER_STAT_UPDATE": 10
+	}
 }
