@@ -20,8 +20,8 @@ module.exports = function Drop(mod) {
 
 	let location = null,
 		locRealTime = 0,
-		curHp = 0,
-		maxHp = 0,
+		curHp = 0n,
+		maxHp = 0n,
 		cooldown = false,
 		afkMode = false;
 
@@ -57,9 +57,9 @@ module.exports = function Drop(mod) {
 			command.message('Use /8 drop cooldown (seconds) to change this value.')
 			return percent;
 		}
-		let percentToDrop = (curHp * 100 / maxHp) - percent;
+		let percentToDrop = (curHp * 100n / maxHp) - BigInt(percent);
 
-		if(percentToDrop <= 0) {
+		if(percentToDrop <= 0n) {
 			command.message('Error: Cannot drop to a value above or equal to your current HP.')
 			return mod.settings.defaultPercent;
 		}
@@ -67,7 +67,7 @@ module.exports = function Drop(mod) {
 		cooldown = true;
 		setTimeout(() => {
 			cooldown = false
-			if(afkMode && (curHp * 100 / maxHp >= mod.settings.afkMax) && !game.me.inCombat) {
+			if(afkMode && (curHp * 100n / maxHp >= BigInt(mod.settings.afkMax)) && !game.me.inCombat) {
 				dropHP(mod.settings.afkMin)
 			}
 		}, mod.settings.dropCooldown * 1000);
@@ -94,7 +94,7 @@ module.exports = function Drop(mod) {
 		if(game.me.is(event.target)) {
 			curHp = event.curHp;
 			maxHp = event.maxHp;
-			if(afkMode && (curHp * 100 / maxHp >= mod.settings.afkMax) && !cooldown) {
+			if(afkMode && (curHp * 100n / maxHp >= BigInt(mod.settings.afkMax)) && !cooldown) {
 				if(game.me.inCombat) {
 					afkMode = false;
 					command.message('You are in combat. Disabling afkmode.')
@@ -148,7 +148,7 @@ module.exports = function Drop(mod) {
 				afkMode = !afkMode
 				command.message('AFK Mode ' + (afkMode ? 'en' : 'dis') + 'abled.')
 				command.message('This feature is experimental and may cause DCs.')
-				if(afkMode && (curHp * 100 / maxHp >= mod.settings.afkMax)) {
+				if(afkMode && (curHp * 100n / maxHp >= BigInt(mod.settings.afkMax))) {
 					dropHP(mod.settings.afkMin)
 				}
 				break
