@@ -74,7 +74,7 @@ module.exports = function Drop(mod) {
 		
 
 		mod.send('C_PLAYER_LOCATION', 5, Object.assign({}, location, {
-			loc: location.loc.addN({z: 400 + percentToDrop * (game.me.race === 'castanic' ? 20 : 10)}),
+			loc: location.loc.addN({z: 400 + Number(percentToDrop) * (game.me.race === 'castanic' ? 20 : 10)}),
 			type: 2,
 			time: location.time - locRealTime + Date.now() - 50
 		}));
