@@ -1,13 +1,13 @@
 {
 	"files": {
 		"README.md": "63c86e2c06f2fded97b939e5278e325b8c1eab6cc95c5e365ed9e41b30e239e4",
-		"index.js": "5caa51b3b4c1c7b4483bc33e94b557eeeb7a715989462dab6819a1791bfeb459",
+		"index.js": "a0ae3fb11c5b7da35d09e3096b33dc99a46832c6c4659efc028b0a31bb6ae664",
 		"module.json": "6787f2182110510cdae52a817de22c24881a519279cd457eaeb3853fb23b2c2b",
 		"setting_migration.js": "94e757403439b29f2d7cd483c3ee22088379c7c8d15cbc69ee13f0adb20bb582"
 	},
 	"defs": {
 		"C_PLAYER_LOCATION": 5,
 		"S_CREATURE_CHANGE_HP": 6,
-		"S_PLAYER_STAT_UPDATE": 10
+		"S_PLAYER_STAT_UPDATE": 12
 	}
 }

@@ -1,22 +1,5 @@
 module.exports = function Drop(mod) {
-
-	//pinkie proxy support
-	const command = mod.command || mod.require.command;
-	const game = mod.game || mod.require['tera-game-state'];
-	if(mod.proxyAuthor !== 'caali') {
-		const options = require('./module').options;
-		if(options) {
-			const settingsVersion = options.settingsVersion;
-			if(settingsVersion) {
-				let settings = require('./' + (options.settingsMigrator))(settings._version, settingsVersion, settings);
-				settings._version = settingsVersion;
-			}
-		}
-	}
-	function saveSettings() {
-		if(mod.proxyAuthor !== 'caali') return;
-		mod.saveSettings();
-	}
+	const command = mod.command;
 
 	let location = null,
 		locRealTime = 0,
@@ -67,14 +50,14 @@ module.exports = function Drop(mod) {
 		cooldown = true;
 		setTimeout(() => {
 			cooldown = false;
-			if(afkMode && (curHp * 100 / maxHp >= mod.settings.afkMax) && !game.me.inCombat) {
+			if(afkMode && (curHp * 100 / maxHp >= mod.settings.afkMax) && !mod.game.me.inCombat) {
 				dropHP(mod.settings.afkMin);
 			}
 		}, mod.settings.dropCooldown * 1000);
 		
 
 		mod.send('C_PLAYER_LOCATION', 5, Object.assign({}, location, {
-			loc: location.loc.addN({z: 400 + percentToDrop * (game.me.race === 'castanic' ? 20 : 10)}),
+			loc: location.loc.addN({z: 400 + percentToDrop * (mod.game.me.race === 'castanic' ? 20 : 10)}),
 			type: 2,
 			time: location.time - locRealTime + Date.now() - 50
 		}));
@@ -85,17 +68,17 @@ module.exports = function Drop(mod) {
 		return percent;
 	}
 
-	mod.hook('S_PLAYER_STAT_UPDATE', 10, event => {
+	mod.hook('S_PLAYER_STAT_UPDATE', 12, event => {
 		curHp = Number(event.hp); //player hp can never be above 2.147B, so we dont need to use BigInt
 		maxHp = Number(event.maxHp);
 	});
 
 	mod.hook('S_CREATURE_CHANGE_HP', 6, event => {
-		if(game.me.is(event.target)) {
+		if(mod.game.me.is(event.target)) {
 			curHp = Number(event.curHp);
 			maxHp = Number(event.maxHp);
 			if(afkMode && (curHp * 100 / maxHp >= mod.settings.afkMax) && !cooldown) {
-				if(game.me.inCombat) {
+				if(mod.game.me.inCombat) {
 					afkMode = false;
 					command.message('You are in combat. Disabling afkmode.');
 					return;
@@ -135,7 +118,7 @@ module.exports = function Drop(mod) {
 			if(args[1] >= 0 && args[1] < 60) {
 				command.message('Cooldown set to: ' + cd.toString());
 				mod.settings.dropCooldown = cd;
-				saveSettings();
+				mod.saveSettings();
 			} else {
 				command.message('Error: Cooldown must be between 0 and 60 seconds.');
 			}
@@ -154,16 +137,16 @@ module.exports = function Drop(mod) {
 			break;
 		case 'afkmin':
 			mod.settings.afkMin = parseArgs(mod.settings.afkMin, args[1], 'Afk Min');
-			saveSettings();
+			mod.saveSettings();
 			break;
 		case 'afkmax':
 			mod.settings.afkMax = parseArgs(mod.settings.afkMax, args[1], 'Afk Max');
-			saveSettings();
+			mod.saveSettings();
 			break;
 
 		default:
 			mod.settings.defaultPercent = dropHP(args[0]);
-			saveSettings();
+			mod.saveSettings();
 			break;
 		}
 	});
