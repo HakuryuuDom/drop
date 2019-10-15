@@ -68,7 +68,7 @@ module.exports = function Drop(mod) {
 		return percent;
 	}
 
-	mod.hook('S_PLAYER_STAT_UPDATE', 12, event => {
+	mod.hook('S_PLAYER_STAT_UPDATE', (mod.majorPatchVersion > 85 ? 13 : 12), event => {
 		curHp = Number(event.hp); //player hp can never be above 2.147B, so we dont need to use BigInt
 		maxHp = Number(event.maxHp);
 	});
